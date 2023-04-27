@@ -1,0 +1,77 @@
+[tool.poetry]
+name = "api"
+version = "0.1.0"
+description = ""
+authors = []
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = ">=4.1.2"
+psycopg2-binary = ">=2.9.5"
+django-ninja = "0.20.0"
+django-cors-headers = "3.13.0"
+pyjwt = "2.6.0"
+whitenoise = "^5.2.0"
+gunicorn = "^20.1.0"
+wemake-python-styleguide = "^0.17.0"
+
+
+[tool.black]
+line-length = 140
+skip-string-normalization = true
+target_version = ['py37']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | migrations
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.venv
+  | \.vscode
+  | \.idea
+)
+'''
+
+[tool.isort]
+line_length = 140
+force_grid_wrap = 0
+multi_line_output = 3
+use_parentheses = true
+include_trailing_comma = true
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+lines_between_types = 1
+skip = "migrations"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+filterwarnings = "ignore::DeprecationWarning"
+addopts = "-s -vv"
+testpaths = "tests"
+
+[build-system]
+requires = ["poetry>=1.0.10"]
+build-backend = "poetry.masonry.api"
+
+[tool.flake8]
+exclude = "docs,tests,.venv,migrations"
+max-line-length = 140
+max-complexity = 18
+select = "C,E,F,W,B"
+ignore = "W503,E203,D100,WPS300,WPS110,WPS433,WPS111,WPS114,WPS226,WPS201,WPS202,WPS412,WPS305,WPS420,WPS229,WPS210,WPS306,WPS115,WPS407,WPS329,WPS221,WPS604,WPS432,WPS326,WPS323,WPS336,WPS100,WPS425"
+
+[tool.pep8]
+ignore = "E701"
+
+[tool.mypy]
+ignore_missing_imports = "True"
+follow_imports = "silent"
+strict_optional = "True"
+warn_redundant_casts = "True"
+warn_unused_ignores = "True"
+check_untyped_defs = "True"
+no_implicit_reexport = "True"
+disallow_untyped_defs = "True"
+disallow_untyped_calls = "True"
+disallow_incomplete_defs = "True"
+exclude = "migrations"
