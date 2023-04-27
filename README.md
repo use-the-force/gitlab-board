@@ -1,10 +1,14 @@
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![Python](https://img.shields.io/badge/python-3.10-blue.svg)
+![Read the Docs](https://img.shields.io/readthedocs/gitlab-board)
 
 # gitlab-board
 
 Extended kanban board application for GitLab Community Edition. It provides kanban board by assignee, grouped by teams.
 
 See the docs at [readthedocs.io](https://gitlab-board.readthedocs.io/en/latest).
+
+![Demo](docs/source/demo.gif)
 
 ## Requirements
 

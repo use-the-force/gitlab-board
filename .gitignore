@@ -13,8 +13,6 @@ dist-ssr
 *.local
 package-lock.json
 
-poetry.lock
-
 # Editor directories and files
 .vscode
 .idea

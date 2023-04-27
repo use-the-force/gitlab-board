@@ -21,7 +21,7 @@ FROM build
 WORKDIR /usr/src/app
 
 COPY ./board/api .
-COPY ./docker/api/entrypoint.sh .
+COPY ./docker/api ./docker
 COPY ./.env.example .
 
 ENV SECRET_KEY=build
@@ -31,10 +31,10 @@ ENV CORS_ALLOWED_ORIGINS=*
 ENV CSRF_TRUSTED_ORIGINS=*
 
 RUN set -ex \
-    && chmod +x /usr/src/app/entrypoint.sh \
+    && chmod +x /usr/src/app/docker/entrypoint.sh \
     && /usr/src/app/manage.py collectstatic --noinput --clear \
     && mkdir /srv/www/htdocs/media
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/app/docker/entrypoint.sh"]

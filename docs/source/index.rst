@@ -3,6 +3,8 @@ gitlab-board
 
 Extended kanban board application for GitLab Community Edition. It provides kanban board by assignee, grouped by teams.
 
+.. image:: demo.gif
+
 Requirements
 -------------------
 
