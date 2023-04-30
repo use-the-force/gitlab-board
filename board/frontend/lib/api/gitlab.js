@@ -23,7 +23,7 @@ export const getProjects = async () => {
         ++page;
     } while (data.length === perPage || !data);
 
-    return projects.sort();
+    return projects.sort((a, b) => a.name_with_namespace.localeCompare(b.name_with_namespace));
 };
 
 
