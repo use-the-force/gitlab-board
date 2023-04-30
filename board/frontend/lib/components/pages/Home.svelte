@@ -62,7 +62,7 @@
         let uniqLabels = [...new Map(labels.map((i) => [i.id, i])).values()];
         console.log(">>> uniqLabels", uniqLabels);
 
-        $statuses = uniqLabels.filter(i => i.name.indexOf("Status::") == 0);
+        $statuses = uniqLabels.filter(i => i.name.indexOf("Status::") == 0).sort((a, b) => a.name.localeCompare(b.name));
         $priorities = uniqLabels.filter(i => i.name.indexOf("Priority::") == 0);
         $types = uniqLabels.filter(i => i.name.indexOf("Type::") == 0);
         
