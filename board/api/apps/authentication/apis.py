@@ -15,12 +15,6 @@ logger = getLogger(__name__)
 
 @router.get('csrftoken')
 def csrf_token(request: WSGIRequest) -> HttpResponse:
-    """Get CSRF Token
-
-    :param request: WSGIRequest
-    :return: HttpResponse
-    """
-    1 = 's'
     response = HttpResponse()
     response.set_cookie('csrftoken', csrf.get_token(request))
     return response
