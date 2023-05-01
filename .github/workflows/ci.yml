@@ -13,12 +13,16 @@ jobs:
           python-version: "3.10.10"
       - name: Build
         run: docker build . --file ./docker/api/Dockerfile --tag api:${{ github.sha }}
-      - name: Run image
+      - name: Run Poetry Image
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: "1.2.2"
-      - name: View poetry --help
-        run: poetry --help
+      - name: Config Poetry
+        run: poetry config virtualenvs.create false
+      - name: Install Poetry Dependencies
+        run: poetry install --without dev
+      - name: Run wemake-python-services
+        run: flake8 .
   frontend:
     runs-on: ubuntu-latest
     steps:
