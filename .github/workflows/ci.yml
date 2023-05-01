@@ -12,7 +12,7 @@ jobs:
       - name: Build
         run: docker build . --file ./docker/api/Dockerfile --tag api:${{ github.sha }}
       - name: Lint
-        run: docker run -t -i --rm api:${{ github.sha }} flake8 .
+        run: docker run -i --rm api:${{ github.sha }} flake8 .
   frontend:
     runs-on: ubuntu-latest
     steps:
