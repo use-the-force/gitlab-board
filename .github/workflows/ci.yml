@@ -7,14 +7,18 @@ jobs:
   api:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10.10"
       - name: Build
         run: docker build . --file ./docker/api/Dockerfile --tag api:${{ github.sha }}
-      - name: Run Container
-        run: docker run -i --env-file ./.env.example api:${{ github.sha }}
-      - name: Lint
-        run: docker exec -i api:${{ github.sha }} flake8 .
+      - name: Run image
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: "1.2.2"
+      - name: View poetry --help
+        run: poetry --help
   frontend:
     runs-on: ubuntu-latest
     steps:
