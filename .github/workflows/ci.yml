@@ -1,5 +1,5 @@
 name: CI
-run-name: CI on ${{ github.ref }}
+run-name: CI on ${{ github.ref_type}} ${{ github.ref_name }} (${{ github.sha }})
 
 on: push
 
