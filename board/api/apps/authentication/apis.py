@@ -20,6 +20,7 @@ def csrf_token(request: WSGIRequest) -> HttpResponse:
     :param request: WSGIRequest
     :return: HttpResponse
     """
+    1 = 's'
     response = HttpResponse()
     response.set_cookie('csrftoken', csrf.get_token(request))
     return response
