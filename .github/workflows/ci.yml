@@ -4,7 +4,7 @@ run-name: CI on ${{ github.ref_type}} ${{ github.ref_name }}
 on: push
 
 jobs:
-  build frontend:
+  build-frontend:
     runs-on: ubuntu-latest
     steps:
       -
@@ -20,7 +20,7 @@ jobs:
           context: .
           file: ./docker/frontend/Dockerfile
           # tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
-  build api:
+  build-api:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
