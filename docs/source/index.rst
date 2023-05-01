@@ -12,7 +12,7 @@ The application requires three scoped labels:
 
 - Status::{name} - status labels
 - Priority::{name} - priority labels
-- Task::{name} - task type
+- Type::{name} - task type
 
 Installation
 -------------------
