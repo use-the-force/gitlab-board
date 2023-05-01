@@ -178,7 +178,7 @@
 
     .milestone i {
         position:relative;
-        top:.23rem;
+        top: .23rem;
         color: #9d9d9d;
     }
 </style>

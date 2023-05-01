@@ -32,65 +32,65 @@
             $issues[sissue_index].labels = new_labels_list;
             $issues[sissue_index].changed = true; //temporary, just to highlight changed issues
             $issues;
+        } catch (e) {
         }
-        catch (e) {}
-        
+
     }
 </script>
 
 {#if displayedIssues.length > 0}
-<div class="container-fluid mt-2">
-<table class="table table-bordered rounded rounded-1 overflow-hidden" style="margin: 5px">
-    <thead>
-        <tr>
-            <th>Status</th>
-            <th>Project</th>
-            <th>Priority</th>
-            <th>Issue</th>
-        </tr>
-    </thead>
-    <tbody>
-    {#each displayedIssues as iss (iss.id)}
-        <tr class={iss.changed ? "changed" : ""}>
-            <td class="status">
-                <select class="form-select form-select-sm" 
-                    on:change={e => {handleChangeIssueStatus(e.target.value, iss)}}>
-                    {#each doGetTeamColumns() as c, ci}
-                        <optgroup label={c.name}>
-                            {#each getUniqLabelNamesByIds(c.gitlab_label_ids) as label}
-                                <option 
-                                    selected={c.name == col.name && extractStatusLabel(iss.labels) == label} 
-                                    value={label}>
-                                    {label}
-                                </option>
+    <div class="container-fluid mt-2">
+        <table class="table table-bordered rounded rounded-1 overflow-hidden" style="margin: 5px">
+            <thead>
+            <tr>
+                <th>Status</th>
+                <th>Project</th>
+                <th>Priority</th>
+                <th>Issue</th>
+            </tr>
+            </thead>
+            <tbody>
+            {#each displayedIssues as iss (iss.id)}
+                <tr class={iss.changed ? "changed" : ""}>
+                    <td class="status">
+                        <select class="form-select form-select-sm"
+                                on:change={e => {handleChangeIssueStatus(e.target.value, iss)}}>
+                            {#each doGetTeamColumns() as c, ci}
+                                <optgroup label={c.name}>
+                                    {#each getUniqLabelNamesByIds(c.gitlab_label_ids) as label}
+                                        <option
+                                                selected={c.name == col.name && extractStatusLabel(iss.labels) == label}
+                                                value={label}>
+                                            {label}
+                                        </option>
+                                    {/each}
+                                </optgroup>
                             {/each}
-                        </optgroup>
-                    {/each}
-                </select>
-            </td>
-            <td class="project">
-                {iss.references.full}
-            </td>
-            <td class="priority">
-                {#if getPriorityLabel(iss.labels)}
-                    <PriorityLabel label={getPriorityLabel(iss.labels)}/>
-                {/if}
-            </td>
-            <td class="issue">
-                <IssueType labels={iss.labels}></IssueType>
-                <a href="{iss.web_url}" target="_blank" rel="noreferrer">{iss.title}</a>
-                {#if iss.milestone}
+                        </select>
+                    </td>
+                    <td class="project">
+                        {iss.references.full}
+                    </td>
+                    <td class="priority">
+                        {#if getPriorityLabel(iss.labels)}
+                            <PriorityLabel label={getPriorityLabel(iss.labels)}/>
+                        {/if}
+                    </td>
+                    <td class="issue">
+                        <IssueType labels={iss.labels}></IssueType>
+                        <a href="{iss.web_url}" target="_blank" rel="noreferrer">{iss.title}</a>
+                        {#if iss.milestone}
                     <span class="milestone">
                         <i class="bi bi-tag-fill"></i> 
                         <a href="{iss.milestone.web_url}" target="_blank" rel="noreferrer">{iss.milestone.title}</a>
                     </span>
-                {/if}
-            </td>
-        </tr>
-    {/each}
-    </tbody>
-</table>
-</div>
+                        {/if}
+                    </td>
+                </tr>
+            {/each}
+            </tbody>
+        </table>
+    </div>
 {/if}
 
 
@@ -117,18 +117,27 @@
     .priority {
         width: 150px;
     }
+
     :global(.priority .badge) {
         margin-top: 0 !important;
     }
 
     .milestone {
-        color: #999;
-        margin-left: 20px;
+        margin-left: .25rem;
     }
-    
+
     .milestone a {
-        text-decoration: none;
-        color: currentColor;
+        font-size: .8rem;
+        color: #9d9d9d;
+        position: relative;
+        top: .05rem;
+        font-weight: 500;
+    }
+
+    .milestone i {
+        position:relative;
+        top: .05rem;
+        color: #9d9d9d;
     }
 
     .issue a {
