@@ -17,6 +17,7 @@ jobs:
         run: ls -al
       - name: Install Poetry Dependencies
         run: |
+          cd board/api
           pip install -U pip
           pip install poetry
           poetry install --without dev
