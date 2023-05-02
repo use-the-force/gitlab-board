@@ -7,13 +7,12 @@ jobs:
   api:
     runs-on: ubuntu-latest
     steps:
-      - name: Build
-        run: docker build . --file ./docker/api/Dockerfile --tag api:${{ github.sha }}
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10.10"
-      - run: ls -al
+      - name: Test Docker Image
+        run: docker build . --file ./docker/api/Dockerfile --tag api:${{ github.sha }}
       - name: Install Poetry Dependencies
         run: |
           pip install -U pip
