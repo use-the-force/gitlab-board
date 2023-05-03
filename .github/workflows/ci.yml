@@ -35,5 +35,5 @@ jobs:
       - name: Lint
         run: |
           cd board/frontend
-          npm i
+          npm i --only=dev
           eslint .
