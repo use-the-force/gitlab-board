@@ -23,7 +23,7 @@ jobs:
         env:
           POETRY_VIRTUALENVS_CREATE: false
       - name: Lint
-        run: flake8 .
+        run: flake8 --config .flake8 .
   frontend:
     runs-on: ubuntu-latest
     steps:
