@@ -36,4 +36,4 @@ jobs:
         run: |
           cd board/frontend
           npm i --only=dev
-          eslint .
+          npx eslint .
