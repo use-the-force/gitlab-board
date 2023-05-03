@@ -1,6 +1,8 @@
 [![License](https://img.shields.io/badge/license-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 ![Python](https://img.shields.io/badge/python-3.10-blue.svg)
+![Github CI](https://github.com/use-the-force/gitlab-board/actions/workflows/ci.yml/badge.svg?branch=main)
 ![Read the Docs](https://img.shields.io/readthedocs/gitlab-board)
+[![wemake-python-styleguide](https://img.shields.io/badge/style-wemake-000000.svg)](https://github.com/wemake-services/wemake-python-styleguide)
 
 # gitlab-board
 
