@@ -103,7 +103,7 @@ export const getProjectIssues = async (projectId) => {
 export const getAllProjectsLabels = async (projectIds) => {
     const calls = [];
 
-    for (let id of projectIds) {
+    for (const id of projectIds) {
         calls.push(getProjectLabels(id));
     }
 
@@ -136,7 +136,7 @@ export const getProjectLabels = async (projectId) => {
 };
 
 export const updateIssueLabels = async (projectId, issueId, labels) => {
-    let res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}?labels=${labels.join(",")}`,
+    const res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}?labels=${labels.join(",")}`,
         {
             method: "PUT",
             headers: {
