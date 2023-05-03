@@ -1,7 +1,6 @@
 const GITLAB_API_URL = import.meta.env.VITE_GITLAB_API_URL;
 const GITLAB_API_TOKEN = import.meta.env.VITE_GITLAB_API_TOKEN;
 
-
 export const getProjects = async () => {
     const perPage = 100;
     const projects = [];
@@ -25,7 +24,6 @@ export const getProjects = async () => {
 
     return projects.sort((a, b) => a.name_with_namespace.localeCompare(b.name_with_namespace));
 };
-
 
 export const getAllProjectsMembers = async (projectIds) => {
     const calls = [];
@@ -137,8 +135,8 @@ export const getProjectLabels = async (projectId) => {
     return labels;
 };
 
-export const updateIssueLabels = async (project_id, issue_id, labels) => {
-    let res = await fetch(`${GITLAB_API_URL}/projects/${project_id}/issues/${issue_id}?labels=${labels.join(",")}`,
+export const updateIssueLabels = async (projectId, issueId, labels) => {
+    let res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}?labels=${labels.join(",")}`,
         {
             method: "PUT",
             headers: {
