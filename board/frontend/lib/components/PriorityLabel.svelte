@@ -12,7 +12,7 @@
     if (use_label) {
         text_color = use_label[0].text_color;
         color = use_label[0].color;
-        name = use_label[0].description;
+        name = use_label[0].description || use_label[0].name;
     }
 </script>
 
