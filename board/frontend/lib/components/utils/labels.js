@@ -25,8 +25,7 @@ export const extractStatusLabel = (labels) => {
     return labels.filter(e => e.includes("Status::"));
 };
 
-
-export const getUniqLabelNamesByIds = (label_ids) => {
-    const label_names = label_ids.map(id => getLabelNameById(id));
-    return [...new Set(label_names)];
-}
+export const getUniqLabelNamesByIds = (labelIds) => {
+    const labelNames = labelIds.map(id => getLabelNameById(id));
+    return [...new Set(labelNames)];
+};

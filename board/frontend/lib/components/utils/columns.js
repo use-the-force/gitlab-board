@@ -4,7 +4,7 @@ import { activeProjectFilter, teams } from "../../store";
 export const getTeamColumns = () => {
     const $teams = get(teams);
     const $activeProjectFilter = get(activeProjectFilter);
-    const team = $teams.filter(t => t.id == $activeProjectFilter)[0];
+    const team = $teams.filter(t => t.id === $activeProjectFilter)[0];
 
     if (team?.columns) {
         return team.columns;

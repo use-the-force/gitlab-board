@@ -10,7 +10,7 @@
         if (!value) {
             $activeProjectFilter = null;
         } else {
-            $activeProjectFilter = value;
+            $activeProjectFilter = parseInt(value);
         }
     }
 

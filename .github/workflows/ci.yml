@@ -1,0 +1,39 @@
+name: CI
+run-name: CI on ${{ github.ref_type}} ${{ github.ref_name }}
+
+on: push
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10.10"
+      - name: Build
+        run: docker build . --file ./docker/api/Dockerfile --tag api:${{ github.sha }}
+      - name: Install Poetry Dependencies
+        run: |
+          cd board/api
+          pip install -U pip
+          pip install poetry
+          poetry install --without dev
+        env:
+          POETRY_VIRTUALENVS_CREATE: false
+      - name: Lint
+        run: |
+          cd board/api
+          flake8 --config .flake8 .
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: docker build . --file ./docker/frontend/Dockerfile --tag frontend:${{ github.sha }}
+      - name: Lint
+        run: |
+          cd board/frontend
+          npm i --save-dev
+          npx eslint .
