@@ -35,5 +35,5 @@ jobs:
       - name: Lint
         run: |
           cd board/frontend
-          npm i --only=dev
+          npm i --save-dev
           npx eslint .
