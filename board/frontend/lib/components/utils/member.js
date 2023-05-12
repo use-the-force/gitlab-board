@@ -4,4 +4,4 @@ export const getMemberAvatar = (member) => {
     }
 
     return "/images/no-avatar.jpg";
-}
+};

@@ -97,10 +97,8 @@ export const getProjectIssues = async (projectId) => {
             issues.push(...data);
         } catch {
         }
-
         ++page;
     } while (data.length === perPage || !data);
-
     return issues;
 };
 
@@ -140,7 +138,6 @@ export const getProjectLabels = async (projectId) => {
 };
 
 export const getProjectIssueMRs = async (projectId, issueId) => {
-
     const res = await fetch(
         `${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}/related_merge_requests`,
         {
@@ -151,7 +148,7 @@ export const getProjectIssueMRs = async (projectId, issueId) => {
     const data = await res.json();
     return data;
     // console.log("getProjectIssueMRs", projectId, issueId, data);
-}
+};
 
 export const updateIssueLabels = async (projectId, issueId, labels) => {
     const res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}?labels=${labels.join(",")}`,
