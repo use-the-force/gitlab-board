@@ -90,7 +90,7 @@ export const getProjectIssues = async (projectId) => {
                     }
                 });
             data = await res.json();
-            for (let i of data) {
+            for (const i of data) {
                 const mrs = await getProjectIssueMRs(projectId, i.iid);
                 i.merge_requests = mrs;
             }
