@@ -5,6 +5,7 @@
     import { issues, activeProjectFilter, teamprojects, displaymode, teams } from "../../store";
     import { getLabelNameById } from "../utils/labels";
     import { getTeamColumns } from "../utils/columns";
+    import { getMemberAvatar } from "../utils/member";
 
     export let member;
     let isOpen = false;
@@ -31,32 +32,34 @@
 
     $: getDisplayedIssues = (col) => {
         return $issues.filter(i => {
-            if ($activeProjectFilter != null) {
+            // if ($activeProjectFilter != null) {
                 if ($teamprojects[$activeProjectFilter].some(f => f == i.project_id)) {
+                    // Unassigned issues
                     if (!i.assignee && !member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
                         return i;
                     }
+                    // Assigned issues
                     if (i.assignee && i.assignee.id == member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
                         return i;
                     }
+                    // Issues by merge requests
+                    if (i.merge_requests.filter(mr => member.id && mr.assignee && mr.assignee.id == member.id).length > 0 && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
+                        return i;
+                    }
                 }
-            } else {
-                if (!i.assignee && !member.id && col.gitlab_label_ids.filter(x => i.labels.includes(x)).length > 0) {
-                    return i;
-                }
-                if (i.assignee && i.assignee.id == member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
-                    return i;
-                }
-            }
+            // } else {
+            //     if (!i.assignee && !member.id && col.gitlab_label_ids.filter(x => i.labels.includes(x)).length > 0) {
+            //         return i;
+            //     }
+            //     if (i.assignee && i.assignee.id == member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
+            //         return i;
+            //     }
+            // }
         });
     }
 
-    $: getMemberAvatar = (member) => {
-        if (member.avatar_url) {
-            return member.avatar_url
-        }
-
-        return "/images/no-avatar.jpg";
+    $: getMemberAvatarWrap = (m) => {
+        return getMemberAvatar(m)
     }
 
     beforeUpdate(() => {
@@ -84,12 +87,12 @@
         {#if $displaymode === "kanban"}
             <div class="row row-cols-4">
                 {#each doGetTeamColumns() as col, i}
-                    <IssuesColumn col={col} issues={getDisplayedIssues(col)} bind:this={bindcolumns[i]}></IssuesColumn>
+                    <IssuesColumn {col} issues={getDisplayedIssues(col)} bind:this={bindcolumns[i]}></IssuesColumn>
                 {/each}
             </div>
         {:else}
             {#each doGetTeamColumns() as col, i}
-                <IssuesRow col={col} displayedIssues={getDisplayedIssues(col)} bind:this={bindcolumns[i]}></IssuesRow>
+                <IssuesRow {col} {member} displayedIssues={getDisplayedIssues(col)} bind:this={bindcolumns[i]}></IssuesRow>
             {/each}
         {/if}
     </div>

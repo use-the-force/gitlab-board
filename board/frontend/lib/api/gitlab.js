@@ -90,6 +90,10 @@ export const getProjectIssues = async (projectId) => {
                     }
                 });
             data = await res.json();
+            for (let i of data) {
+                const mrs = await getProjectIssueMRs(projectId, i.iid);
+                i.merge_requests = mrs;
+            }
             issues.push(...data);
         } catch {
         }
@@ -134,6 +138,20 @@ export const getProjectLabels = async (projectId) => {
 
     return labels;
 };
+
+export const getProjectIssueMRs = async (projectId, issueId) => {
+
+    const res = await fetch(
+        `${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}/related_merge_requests`,
+        {
+            headers: {
+                "PRIVATE-TOKEN": GITLAB_API_TOKEN
+            }
+        });
+    const data = await res.json();
+    return data;
+    // console.log("getProjectIssueMRs", projectId, issueId, data);
+}
 
 export const updateIssueLabels = async (projectId, issueId, labels) => {
     const res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}?labels=${labels.join(",")}`,
