@@ -9,7 +9,6 @@ ENV PYTHONUNBUFFERED=1 \
     PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 ADD ./board/api/pyproject.toml .
-ADD ./board/api/poetry.lock .
 
 RUN apk add --no-cache --virtual build-base g++ gcc libffi-dev python3-dev \
     && pip install --no-cache-dir poetry==${POETRY_VERSION} \
