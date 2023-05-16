@@ -1,6 +1,6 @@
 import { writable, readable } from "svelte/store";
 
-export let loadingBoardInfo = writable("Loading...");
+export const loadingBoardInfo = writable("Loading...");
 export let authorized = writable(false);
 
 export const projects = writable([]);
