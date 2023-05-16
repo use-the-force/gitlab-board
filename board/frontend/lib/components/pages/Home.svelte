@@ -12,8 +12,7 @@
         teams,
         displaymode,
         activeProjectFilter,
-        loadingBoardInfo,
-        setLoadingBoardInfo
+        loadingBoardInfo
     } from "../../store";
     import { getAllProjectsIssues, getAllProjectsMembers, getAllProjectsLabels, getProjects } from "../../api/gitlab";
     import { getTeams, getTeamProjects } from "../../api/board";
@@ -102,7 +101,7 @@
         $members = await getAllProjectsMembers($projects.map(({id}) => id));
         $members = [...$members, {name: "No Assignee", id: null}].sort((a, b) => a.name.localeCompare(b.name));
 
-        $loadingBoardInfo = "Fetching issues...";
+        $loadingBoardInfo = "Fetching issues and pull requests...";
         $issues = await getAllProjectsIssues($projects.map(({id}) => id));
         showLoading = false;
     });
