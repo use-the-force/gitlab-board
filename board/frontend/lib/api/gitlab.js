@@ -90,13 +90,15 @@ export const getProjectIssues = async (projectId) => {
                     }
                 });
             data = await res.json();
+            for (const i of data) {
+                const mrs = await getProjectIssueMRs(projectId, i.iid);
+                i.merge_requests = mrs;
+            }
             issues.push(...data);
         } catch {
         }
-
         ++page;
     } while (data.length === perPage || !data);
-
     return issues;
 };
 
@@ -133,6 +135,17 @@ export const getProjectLabels = async (projectId) => {
     } while (data.length === perPage || !data);
 
     return labels;
+};
+
+export const getProjectIssueMRs = async (projectId, issueId) => {
+    const res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}/related_merge_requests`,
+        {
+            headers: {
+                "PRIVATE-TOKEN": GITLAB_API_TOKEN
+            }
+        });
+    const data = await res.json();
+    return data;
 };
 
 export const updateIssueLabels = async (projectId, issueId, labels) => {

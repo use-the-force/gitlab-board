@@ -7,13 +7,19 @@
     import { getTeamColumns } from "../utils/columns";
     import { teams, issues } from "../../store";
     import { updateIssueLabels } from "../../api/gitlab";
+    import { getMemberAvatar } from "../utils/member";
 
     export let col;
+    export let member;
     export let displayedIssues = [];
 
     $: doGetTeamColumns = () => {
         $teams; // reactivity crutch
         return getTeamColumns();
+    }
+
+    $: getMemberAvatarWrap = (m) => {
+        return getMemberAvatar(m);
     }
 
     export const getIssuesCount = () => {
@@ -46,12 +52,16 @@
                 <th>Status</th>
                 <th>Project</th>
                 <th>Priority</th>
+                <th>Reviewer</th>
                 <th>Issue</th>
             </tr>
             </thead>
             <tbody>
             {#each displayedIssues as iss (iss.id)}
-                <tr class={iss.changed ? "changed" : ""}>
+                <tr class={[
+                    (iss.changed ? "changed" : ""), 
+                    (iss.merge_requests.length > 0 && iss.merge_requests[0].assignee && iss.merge_requests[0].assignee.id != iss.assignee.id && iss.assignee.id != member.id ? "in_review" : ""),
+                ].join(" ")}>
                     <td class="status">
                         <select class="form-select form-select-sm"
                                 on:change={e => {handleChangeIssueStatus(e.target.value, iss)}}>
@@ -74,6 +84,16 @@
                     <td class="priority">
                         {#if getPriorityLabel(iss.labels)}
                             <PriorityLabel label={getPriorityLabel(iss.labels)}/>
+                        {/if}
+                    </td>
+                    <td class="reviewer">
+                        {#if iss.assignee && iss.merge_requests.length > 0}
+                            {#if iss.merge_requests[0].assignee}
+                                <div class="member_reviewer">
+                                    <img class="assignee-avatar" src="{getMemberAvatarWrap(iss.merge_requests[0].assignee)}" alt={iss.merge_requests[0].assignee.name}>
+                                    {iss.merge_requests[0].assignee.name}
+                                </div>
+                            {/if}
                         {/if}
                     </td>
                     <td class="issue">
@@ -118,6 +138,10 @@
         width: 150px;
     }
 
+    .reviewer {
+        width: 200px;
+    }
+
     :global(.priority .badge) {
         margin-top: 0 !important;
     }
@@ -150,5 +174,21 @@
 
     .changed {
         background-color: #ffffee;
+    }
+
+    img.assignee-avatar {
+        width: 1.7rem;
+        height: 1.7rem;
+        border-radius: 2rem;
+        background-size: cover;
+        margin: 0 .2rem;
+    }
+
+    .member_reviewer {
+        white-space: nowrap;
+    }
+
+    .in_review {
+        opacity: .5;
     }
 </style>
