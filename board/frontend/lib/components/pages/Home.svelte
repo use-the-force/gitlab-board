@@ -30,11 +30,6 @@
 
     let showBoardSettings = false;
     let showLoading = true;
-    let loadingInfo = "";
-
-    loadingBoardInfo.subscribe(value => {
-		loadingInfo = value;
-	});
 
     const toggleBoardSettings = () => {
         showBoardSettings = !showBoardSettings;
@@ -143,7 +138,7 @@
             <div class="loading">
                 <div>
                     <Loading></Loading>
-                    <h4 class="text-center">{loadingInfo}</h4>
+                    <h4 class="text-center">{$loadingBoardInfo}</h4>
                     <p class="text-center text-secondary">It may take a while.</p>
                 </div>
             </div>
