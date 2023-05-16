@@ -11,7 +11,8 @@
         labels,
         teams,
         displaymode,
-        activeProjectFilter
+        activeProjectFilter,
+        loadingBoardInfo
     } from "../../store";
     import { getAllProjectsIssues, getAllProjectsMembers, getAllProjectsLabels, getProjects } from "../../api/gitlab";
     import { getTeams, getTeamProjects } from "../../api/board";
@@ -76,18 +77,26 @@
     }
 
     onMount(async () => {
+        $loadingBoardInfo = "Fetching teams...";
         await initTeams();
+
+        $loadingBoardInfo = "Fetching team projects...";
         await initTeamProjects();
+
+        $loadingBoardInfo = "Fetching labels...";
         await initLabels();
 
         for (let l of [...$types, ...$statuses, ...$priorities]) {
             $labels[l["name"]] = l;
         }
 
-        console.log(">>> statuses", $statuses)
+        console.log(">>> statuses", $statuses);
 
+        $loadingBoardInfo = "Fetching members...";
         $members = await getAllProjectsMembers($projects.map(({id}) => id));
         $members = [...$members, {name: "No Assignee", id: null}].sort((a, b) => a.name.localeCompare(b.name));
+
+        $loadingBoardInfo = "Fetching issues and pull requests...";
         $issues = await getAllProjectsIssues($projects.map(({id}) => id));
         showLoading = false;
     });
@@ -129,8 +138,8 @@
             <div class="loading">
                 <div>
                     <Loading></Loading>
-                    <h4 class="text-center">Configuring board</h4>
-                    <p class="text-center text-secondary">It may take a while...</p>
+                    <h4 class="text-center">{$loadingBoardInfo}</h4>
+                    <p class="text-center text-secondary">It may take a while.</p>
                 </div>
             </div>
         {:else}
