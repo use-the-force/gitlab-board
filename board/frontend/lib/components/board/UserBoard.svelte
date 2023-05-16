@@ -32,29 +32,20 @@
 
     $: getDisplayedIssues = (col) => {
         return $issues.filter(i => {
-            // if ($activeProjectFilter != null) {
-                if ($teamprojects[$activeProjectFilter].some(f => f == i.project_id)) {
-                    // Unassigned issues
-                    if (!i.assignee && !member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
-                        return i;
-                    }
-                    // Assigned issues
-                    if (i.assignee && i.assignee.id == member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
-                        return i;
-                    }
-                    // Issues by merge requests
-                    if (i.merge_requests.filter(mr => member.id && mr.assignee && mr.assignee.id == member.id).length > 0 && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
-                        return i;
-                    }
+            if ($teamprojects[$activeProjectFilter].some(f => f == i.project_id)) {
+                // Unassigned issues
+                if (!i.assignee && !member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
+                    return i;
                 }
-            // } else {
-            //     if (!i.assignee && !member.id && col.gitlab_label_ids.filter(x => i.labels.includes(x)).length > 0) {
-            //         return i;
-            //     }
-            //     if (i.assignee && i.assignee.id == member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
-            //         return i;
-            //     }
-            // }
+                // Assigned issues
+                if (i.assignee && i.assignee.id == member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
+                    return i;
+                }
+                // Issues by merge requests
+                if (i.merge_requests.filter(mr => member.id && mr.assignee && mr.assignee.id == member.id).length > 0 && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
+                    return i;
+                }
+            }
         });
     }
 
@@ -77,7 +68,7 @@
     <div class="assignee {cnt > 0 ? '' : 'hidden'} p-2">
         <span class="assignee-wrap" on:click={() => (isOpen = !isOpen)}>
             <i class="bi {isOpen ? 'bi-chevron-up' : 'bi-chevron-down'}"></i>
-            <img class="assignee-avatar" src="{getMemberAvatar(member)}" alt="Assignee Avatar">
+            <img class="assignee-avatar" src="{getMemberAvatarWrap(member)}" alt="Assignee Avatar">
             <span class="assignee-name">
                 {member.name} ({cnt})
             </span>
