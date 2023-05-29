@@ -26,10 +26,11 @@ Copy `.env.example` and name it `.env`. Most environment variables are already s
 
     SECRET_KEY=[generate your own]
     JWT_SECRET=[generate your own]
-    DATABASE_PASSWORD=[generate your own]
-    POSTGRES_PASSWORD==[same as DATABASE_PASSWORD]
     VITE_GITLAB_API_URL=[gitlab api url]
     VITE_GITLAB_API_TOKEN=[gitlab api token]
+
+.. warning::
+   Database password is set by default. Replace values in environments DATABASE_PASSWORD and POSTGRES_PASSWORD with a more complex one for security reasons.
 
 
 2. Build images
@@ -52,7 +53,7 @@ Nginx is used as reverse proxy. Copy `nginx/board.conf` to `/etc/nginx/conf.d`.
 Board will be available at http://localhost:8000.
 
 .. warning::
-   DO NOT use it in your production! `nginx/board.conf` is minimal configuration for development.
+    HTTPS is disabled by default. Enable it for production. Such as Let's encrypt.
 
 4. Deploying via docker-compose
 ^^^^^^^^^^^^^^^^^^^
