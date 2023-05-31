@@ -29,7 +29,7 @@ set -e
 
 if [ -z "$1" ]; then
     python3 manage.py migrate
-    gunicorn --config gunicorn.conf board.wsgi
+    gunicorn board.wsgi
 fi
 
 exec "$@"
