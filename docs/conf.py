@@ -6,8 +6,8 @@ project = 'gitlab-board'
 copyright = '2023'
 author = 'Konstantin Polsky & Tigran Muradyan'
 
-release = '0.2.0'
-version = '0.2.0'
+release = '0.4.0'
+version = '0.4.0'
 
 # -- General configuration
 
