@@ -1,5 +1,5 @@
 [flake8]
-exclude = migrations,manage.py,wsgi.py,__init__.py
+exclude = migrations,manage.py,wsgi.py,__init__.py,gunicorn.conf.py
 max-line-length=140
 ignore=D100,D101,D105,D106,D400,DAR100,W503,RST203,WPS204,WPS221,WPS226,WPS306,WPS473,BLK999
 docstring_style=sphinx
