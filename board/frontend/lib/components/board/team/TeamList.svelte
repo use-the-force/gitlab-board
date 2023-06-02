@@ -74,12 +74,11 @@
                             <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
                                    on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}
                                    checked/>
-                            <label class="form-check-label" for="{project.name}-{t.id}-Checkbox">{project.name_with_namespace}</label>
                         {:else}
                             <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
                                    on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}/>
-                            <label class="form-check-label" for="{project.name}-{t.id}-Checkbox">{project.name_with_namespace}</label>
                         {/if}
+                        <label class="form-check-label" for="{project.name}-{t.id}-Checkbox">{project.name_with_namespace}</label>
                     </div>
                 {/each}
             </div>
