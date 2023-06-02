@@ -44,9 +44,7 @@
         }
     }
 
-    $: projectInTeam = (team_id, project_id) => {
-        return $teamprojects[team_id].includes(project_id);
-    };
+    $: projectInTeam = (team_id, project_id) => $teamprojects[team_id].includes(project_id);
 </script>
 
 <div class="my-4">
