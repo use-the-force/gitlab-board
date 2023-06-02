@@ -24,6 +24,7 @@
 
             if (res.ok) {
                 $teams = [...$teams, json_res.data];
+                $teamprojects[json_res.data.id] = [];
                 addTeamName = "";
             }
         }
@@ -42,12 +43,14 @@
             $teamprojects = $teamprojects;
         }
     }
+
+    $: projectInTeam = (team_id, project_id) => $teamprojects[team_id].includes(project_id);
 </script>
 
 <div class="my-4">
     <Form on:submit={e => handleAddTeam(e)}>
         <InputGroup>
-            <Input bind:value={addTeamName} placeholder="Project name"/>
+            <Input bind:value={addTeamName} placeholder="Team name"/>
             <Button color="primary" on:click={handleAddTeam}>Add</Button>
         </InputGroup>
     </Form>
@@ -65,9 +68,9 @@
             <div class="projects mb-2">
                 {#each $projects as project}
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
-                               on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}
-                               checked={$teamprojects[t.id].indexOf(project.id) > -1}/>
+                            <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
+                                   on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}
+                                   checked="{projectInTeam(t.id, project.id)}"/>
                         <label class="form-check-label" for="{project.name}-{t.id}-Checkbox">{project.name_with_namespace}</label>
                     </div>
                 {/each}
