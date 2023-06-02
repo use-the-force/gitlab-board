@@ -52,7 +52,7 @@
 <div class="my-4">
     <Form on:submit={e => handleAddTeam(e)}>
         <InputGroup>
-            <Input bind:value={addTeamName} placeholder="Project name"/>
+            <Input bind:value={addTeamName} placeholder="Team name"/>
             <Button color="primary" on:click={handleAddTeam}>Add</Button>
         </InputGroup>
     </Form>
