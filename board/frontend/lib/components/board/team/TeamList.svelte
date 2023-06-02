@@ -42,6 +42,17 @@
             $teamprojects = $teamprojects;
         }
     }
+
+    const projectInTeam = (team_id, project_id) => {
+        const inTeam = $teamprojects[team_id].includes(project_id);
+
+        if (team_id === 9) {
+            console.log($teamprojects[team_id]);
+            console.log(`${team_id} ${project_id}`);
+            console.log(`inTeam: ${inTeam}`);
+        }
+        return inTeam;
+    };
 </script>
 
 <div class="my-4">
@@ -65,10 +76,16 @@
             <div class="projects mb-2">
                 {#each $projects as project}
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
-                               on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}
-                               checked={$teamprojects[t.id].indexOf(project.id) > -1}/>
-                        <label class="form-check-label" for="{project.name}-{t.id}-Checkbox">{project.name_with_namespace}</label>
+                        {#if projectInTeam(t.id, project.id)}
+                            <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
+                                   on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}
+                                   checked/>
+                            <label class="form-check-label" for="{project.name}-{t.id}-Checkbox">{project.name_with_namespace}</label>
+                        {:else}
+                            <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
+                                   on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}/>
+                            <label class="form-check-label" for="{project.name}-{t.id}-Checkbox">{project.name_with_namespace}</label>
+                        {/if}
                     </div>
                 {/each}
             </div>
