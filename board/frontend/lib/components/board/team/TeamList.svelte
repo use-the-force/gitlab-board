@@ -24,6 +24,7 @@
 
             if (res.ok) {
                 $teams = [...$teams, json_res.data];
+                $teamprojects[json_res.data.id] = [];
                 addTeamName = "";
             }
         }
@@ -43,15 +44,8 @@
         }
     }
 
-    const projectInTeam = (team_id, project_id) => {
-        const inTeam = $teamprojects[team_id].includes(project_id);
-
-        if (team_id === 9) {
-            console.log($teamprojects[team_id]);
-            console.log(`${team_id} ${project_id}`);
-            console.log(`inTeam: ${inTeam}`);
-        }
-        return inTeam;
+    $: projectInTeam = (team_id, project_id) => {
+        return $teamprojects[team_id].includes(project_id);
     };
 </script>
 
