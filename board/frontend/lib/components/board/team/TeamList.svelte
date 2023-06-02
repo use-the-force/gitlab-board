@@ -68,14 +68,9 @@
             <div class="projects mb-2">
                 {#each $projects as project}
                     <div class="form-check">
-                        {#if projectInTeam(t.id, project.id)}
                             <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
                                    on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}
-                                   checked/>
-                        {:else}
-                            <input class="form-check-input" type="checkbox" id="{project.name}-{t.id}-Checkbox"
-                                   on:change={(e) => handleCheckTeamProject(t.id, project.id, e)}/>
-                        {/if}
+                                   checked="{projectInTeam(t.id, project.id)}"/>
                         <label class="form-check-label" for="{project.name}-{t.id}-Checkbox">{project.name_with_namespace}</label>
                     </div>
                 {/each}
