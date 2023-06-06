@@ -122,6 +122,10 @@
         overflow-y: scroll;
     }
 
+    .card-body a {
+        line-height: 1.1rem;
+    }
+
     .card-color {
         border-top: 3px solid;
         border-top-left-radius: 4px;
