@@ -7,6 +7,7 @@ import 'dotenv/config'
 export default defineConfig(({ command, mode }) => {
     return {
         plugins: [svelte()],
+        base: process.env.BOARD_SUBPATH,
         define: {
             global: {
                 BOARD_SUBPATH: process.env.BOARD_SUBPATH
