@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 
 import { setAuthorized } from "../store";
 
-const loginPath = `${global.BOARD_SUBPATH}/login`;
+const loginPath = `/${global.BOARD_SUBPATH}login`;
 
 export const isAuthorized = () => {
     return Cookies.get("authorized") ?? false;
