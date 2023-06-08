@@ -33,6 +33,7 @@ DEPLOYMENT_ENVIRONMENT = os.getenv('DEPLOYMENT_ENVIRONMENT', 'PROD')
 IS_PROD = DEPLOYMENT_ENVIRONMENT == 'PROD'
 IS_LOCAL = DEPLOYMENT_ENVIRONMENT == 'LOCAL'
 DEBUG = not IS_PROD
+BOARD_SUBPATH = os.getenv('BOARD_SUBPATH', '')
 
 ALLOWED_HOSTS = ['*']  # noqa: WPS407
 
@@ -153,11 +154,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = f'/{BOARD_SUBPATH}static/'
 
 STATIC_ROOT = os.path.join(HTDOCS_DIR, 'static') + '/'  # noqa: WPS336
 
-MEDIA_URL = '/media/'
+MEDIA_URL = f'/{BOARD_SUBPATH}media/'
 
 MEDIA_ROOT = os.path.join(HTDOCS_DIR, 'media') + '/'  # noqa: WPS336
 

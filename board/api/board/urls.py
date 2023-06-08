@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.urls import path
 
 from board.apis import api
-from board.settings import MEDIA_ROOT, MEDIA_URL, STATIC_ROOT, STATIC_URL
+from board.settings import MEDIA_ROOT, MEDIA_URL, STATIC_ROOT, STATIC_URL, BOARD_SUBPATH
 
 urlpatterns = (
     [
-        path('admin/', admin.site.urls),
-        path('api/v1/', api.urls),
+        path(f'{BOARD_SUBPATH}admin/', admin.site.urls),
+        path(f'{BOARD_SUBPATH}api/v1/', api.urls),
     ]
     + static(STATIC_URL, document_root=STATIC_ROOT)
     + static(MEDIA_URL, document_root=MEDIA_ROOT)
