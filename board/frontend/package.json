@@ -7,10 +7,11 @@
     "dev": "vite --host 0.0.0.0 --port 8000",
     "prod": "vite --host 0.0.0.0 --port 8000",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host 0.0.0.0 --port 8000"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.1.0",
+    "dotenv": "^16.1.4",
     "eslint": "^8.38.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",

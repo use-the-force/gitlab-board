@@ -13,10 +13,10 @@
 
 
 <Router>
-    <Route path="/">
+    <Route path={`${global.BOARD_SUBPATH}/`}>
         <Home/>
     </Route>
-    <Route path="/login">
+    <Route path={`${global.BOARD_SUBPATH}/login`}>
         <Login/>
     </Route>
 </Router>
