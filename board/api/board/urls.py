@@ -20,10 +20,12 @@ from django.urls import path
 from board.apis import api
 from board.settings import MEDIA_ROOT, MEDIA_URL, STATIC_ROOT, STATIC_URL, BOARD_SUBPATH
 
+PATH_PREFIX = BOARD_SUBPATH if BOARD_SUBPATH != "" else ""
+
 urlpatterns = (
     [
-        path(f'{BOARD_SUBPATH}/admin/', admin.site.urls),
-        path(f'{BOARD_SUBPATH}/api/v1/', api.urls),
+        path(f'{PATH_PREFIX}admin/', admin.site.urls),
+        path(f'{PATH_PREFIX}api/v1/', api.urls),
     ]
     + static(STATIC_URL, document_root=STATIC_ROOT)
     + static(MEDIA_URL, document_root=MEDIA_ROOT)
