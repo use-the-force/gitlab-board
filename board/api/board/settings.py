@@ -154,11 +154,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = f'/{BOARD_SUBPATH}static/'
+STATIC_URL = f'{BOARD_SUBPATH}/static/'
 
 STATIC_ROOT = os.path.join(HTDOCS_DIR, 'static') + '/'  # noqa: WPS336
 
-MEDIA_URL = f'/{BOARD_SUBPATH}media/'
+MEDIA_URL = f'{BOARD_SUBPATH}/media/'
 
 MEDIA_ROOT = os.path.join(HTDOCS_DIR, 'media') + '/'  # noqa: WPS336
 
