@@ -8,7 +8,7 @@ export const fetchapi = async (resource, options) => {
     const res = await fetch(resource, options);
 
     if (res.status === 401) {
-        window.location.href = "/login";
+        window.location.href = `${BOARD_API_URL}/login`;
     } else {
         return res;
     }
