@@ -20,7 +20,7 @@ from django.urls import path
 from board.apis import api
 from board.settings import MEDIA_ROOT, MEDIA_URL, STATIC_ROOT, STATIC_URL, BOARD_SUBPATH
 
-PATH_PREFIX = BOARD_SUBPATH if BOARD_SUBPATH != "" else ""
+PATH_PREFIX = BOARD_SUBPATH.lstrip("/") + "/" if BOARD_SUBPATH != "" else ""
 
 urlpatterns = (
     [
