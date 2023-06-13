@@ -1,5 +1,5 @@
-const GITLAB_API_URL = import.meta.env.VITE_GITLAB_API_URL;
-const GITLAB_API_TOKEN = import.meta.env.VITE_GITLAB_API_TOKEN;
+const GITLAB_API_URL = global.VITE_GITLAB_API_URL;
+const GITLAB_API_TOKEN = global.VITE_GITLAB_API_TOKEN;
 
 export const getProjects = async () => {
     const perPage = 100;

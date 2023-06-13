@@ -1,4 +1,4 @@
-const BOARD_API_URL = import.meta.env.VITE_BOARD_API_URL;
+const BOARD_API_URL = global.VITE_BOARD_API_URL;
 
 export const fetchapi = async (resource, options) => {
     await fetch(`${BOARD_API_URL}/auth/csrftoken`, {

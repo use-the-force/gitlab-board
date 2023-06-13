@@ -10,7 +10,9 @@ export default defineConfig(({ command, mode }) => {
         base: process.env.BOARD_SUBPATH,
         define: {
             global: {
-                BOARD_SUBPATH: process.env.BOARD_SUBPATH
+                BOARD_SUBPATH: process.env.BOARD_SUBPATH,
+                VITE_BOARD_API_URL: process.env.VITE_BOARD_API_URL,
+                VITE_GITLAB_API_TOKEN: process.env.VITE_GITLAB_API_TOKEN,
             }
         },
     };
