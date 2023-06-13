@@ -27,4 +27,4 @@ fi
 
 echo -e $RESULT > .env
 
-npm run prod
+npm run preview
