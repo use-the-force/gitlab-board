@@ -1,6 +1,6 @@
 <script>
     const getLogoUrl = () => {
-        const LOGO_URL = import.meta.env.VITE_LOGO_URL;
+        const LOGO_URL = global.VITE_LOGO_URL;
 
         if (!LOGO_URL) {
             return "/images/logo.jpg";

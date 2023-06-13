@@ -14,6 +14,7 @@ export default defineConfig(({ command, mode }) => {
                 VITE_BOARD_API_URL: process.env.VITE_BOARD_API_URL,
                 VITE_GITLAB_API_TOKEN: process.env.VITE_GITLAB_API_TOKEN,
                 VITE_GITLAB_API_URL: process.env.VITE_GITLAB_API_URL,
+                VITE_LOGO_URL: process.env.VITE_LOGO_URL,
             }
         },
     };
