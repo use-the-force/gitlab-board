@@ -13,6 +13,7 @@ export default defineConfig(({ command, mode }) => {
                 BOARD_SUBPATH: process.env.BOARD_SUBPATH,
                 VITE_BOARD_API_URL: process.env.VITE_BOARD_API_URL,
                 VITE_GITLAB_API_TOKEN: process.env.VITE_GITLAB_API_TOKEN,
+                VITE_GITLAB_API_URL: process.env.VITE_GITLAB_API_URL,
             }
         },
     };
