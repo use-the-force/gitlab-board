@@ -2,7 +2,7 @@
 
 </script>
 
-<img class="rounded-circle" alt="User Avatar" src="/images/avatar.jpg"/>
+<img class="rounded-circle" alt="User Avatar" src={`${global.BOARD_SUBPATH}/images/avatar.jpg`}/>
 
 <style>
     img {

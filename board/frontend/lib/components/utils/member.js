@@ -3,5 +3,5 @@ export const getMemberAvatar = (member) => {
         return member.avatar_url;
     }
 
-    return `${global.VITE_BOARD_API_URL}/images/no-avatar.jpg`;
+    return `${global.BOARD_SUBPATH}/images/no-avatar.jpg`;
 };
