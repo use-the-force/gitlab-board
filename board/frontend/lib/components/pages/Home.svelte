@@ -23,7 +23,7 @@
     } from "sveltestrap";
     import UserBoard from "../board/UserBoard.svelte"
     import SubNav from "../SubNav.svelte";
-    import Settings from "../settings/Settings.svelte";
+    import Settings from "../board/Settings.svelte";
     import Navbar from "../layout/Navbar.svelte";
     import Footer from "../layout/Footer.svelte";
     import Loading from "../layout/Loading.svelte";
