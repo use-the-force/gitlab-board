@@ -90,10 +90,12 @@ export const getProjectIssues = async (projectId) => {
                     }
                 });
             data = await res.json();
+            /*
             for (const i of data) {
-                const mrs = await getProjectIssueMRs(projectId, i.iid);
+                const mrs = await getProjectIssueMergeRequests(projectId, i.iid);
                 i.merge_requests = mrs;
             }
+            */
             issues.push(...data);
         } catch {
         }
@@ -137,7 +139,7 @@ export const getProjectLabels = async (projectId) => {
     return labels;
 };
 
-export const getProjectIssueMRs = async (projectId, issueId) => {
+export const getProjectIssueMergeRequests = async (projectId, issueId) => {
     const res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}/related_merge_requests`,
         {
             headers: {

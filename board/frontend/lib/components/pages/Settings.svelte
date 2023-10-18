@@ -37,7 +37,6 @@
                             <p class="text-muted mb-0">Include merge requests in kanban desk.</p>
                         </div>
                         <div class="col-auto">
-                            <!-- <input type="checkbox" on:change={(e) => handleCheckMergeRequests(e)}/> -->
                             <input type="checkbox" bind:checked={$settings.general.mergeRequests} on:change={handleChangeSettingGeneralMergeRequests}/>
                         </div>
                     </div>

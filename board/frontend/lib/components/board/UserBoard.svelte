@@ -41,10 +41,12 @@
                 if (i.assignee && i.assignee.id == member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
                     return i;
                 }
+                /*
                 // Issues by merge requests
                 if (i.merge_requests.filter(mr => member.id && mr.assignee && mr.assignee.id == member.id).length > 0 && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
                     return i;
                 }
+                 */
             }
         });
     }
