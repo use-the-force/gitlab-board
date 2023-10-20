@@ -1,3 +1,6 @@
+import {get} from 'svelte/store';
+import {settings} from "../store.js";
+
 const GITLAB_API_URL = import.meta.env.VITE_GITLAB_API_URL;
 const GITLAB_API_TOKEN = import.meta.env.VITE_GITLAB_API_TOKEN;
 
@@ -76,6 +79,7 @@ export const getAllProjectsIssues = async (projectIds) => {
 };
 
 export const getProjectIssues = async (projectId) => {
+    const storeSettings = get(settings);
     const perPage = 100;
     const issues = [];
     let page = 1;
@@ -90,12 +94,13 @@ export const getProjectIssues = async (projectId) => {
                     }
                 });
             data = await res.json();
-            /*
-            for (const i of data) {
-                const mrs = await getProjectIssueMergeRequests(projectId, i.iid);
-                i.merge_requests = mrs;
+
+            if (storeSettings.general.mergeRequests) {
+                for (const i of data) {
+                    const mrs = await getProjectIssueMergeRequests(projectId, i.iid);
+                    i.merge_requests = mrs;
+                }
             }
-            */
             issues.push(...data);
         } catch {
         }

@@ -1,6 +1,7 @@
 <script>
     import { onMount } from "svelte";
     import {
+        settings,
         projects,
         teamprojects,
         members,
@@ -96,7 +97,12 @@
         $members = await getAllProjectsMembers($projects.map(({id}) => id));
         $members = [...$members, {name: "No Assignee", id: null}].sort((a, b) => a.name.localeCompare(b.name));
 
-        $loadingBoardInfo = "Fetching issues and pull requests...";
+        if ($settings.general.mergeRequests) {
+            $loadingBoardInfo = "Fetching issues and pull requests...";
+        } else {
+            $loadingBoardInfo = "Fetching issues and pull requests...";
+        }
+
         $issues = await getAllProjectsIssues($projects.map(({id}) => id));
         showLoading = false;
     });
