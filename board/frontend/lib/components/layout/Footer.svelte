@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row py-5 my-5">
             <div class="col-6 mb-3 offset-2">
-                <p class="version mb-4">GitLab Board 0.4.1</p>
+                <p class="version mb-4">GitLab Board {import.meta.env.VITE_BOARD_VERSION}</p>
                 <p class="p-small">Kanban board for GitLab Community Edition.</p>
             </div>
 
