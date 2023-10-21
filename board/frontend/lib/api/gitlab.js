@@ -41,6 +41,7 @@ export const getAllProjectsMembers = async (projectIds) => {
     const uniqMembers = [...new Map(members.map((i) => [i.id, i])).values()];
     const filteredMembers = uniqMembers.filter(i => i.state === "active");
     console.log(">>> filteredMembers", filteredMembers);
+
     return filteredMembers;
 };
 
@@ -110,6 +111,7 @@ export const getProjectIssues = async (projectId) => {
         }
         ++page;
     } while (data.length === perPage || !data);
+
     return issues;
 };
 
@@ -155,8 +157,8 @@ export const getProjectIssueMergeRequests = async (projectId, issueId) => {
                 "PRIVATE-TOKEN": GITLAB_API_TOKEN
             }
         });
-    const data = await res.json();
-    return data;
+
+    return await res.json();
 };
 
 export const updateIssueLabels = async (projectId, issueId, labels) => {
