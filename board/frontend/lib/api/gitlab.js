@@ -87,20 +87,24 @@ export const getProjectIssues = async (projectId) => {
 
     do {
         try {
-            const res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues?state=opened&per_page=${perPage}&page=${page}`,
+            const res = await fetch(
+                `${GITLAB_API_URL}/projects/${projectId}/issues?state=opened&per_page=${perPage}&page=${page}`,
                 {
                     headers: {
                         "PRIVATE-TOKEN": GITLAB_API_TOKEN
                     }
-                });
+                }
+            );
             data = await res.json();
 
-            if (storeSettings.general.mergeRequests) {
-                for (const i of data) {
-                    const mrs = await getProjectIssueMergeRequests(projectId, i.iid);
-                    i.merge_requests = mrs;
+            for (const i of data) {
+                i.merge_requests = [];
+
+                if (storeSettings.general.mergeRequests) {
+                    i.merge_requests = await getProjectIssueMergeRequests(projectId, i.iid);
                 }
             }
+
             issues.push(...data);
         } catch {
         }

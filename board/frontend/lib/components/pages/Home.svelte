@@ -100,7 +100,7 @@
         if ($settings.general.mergeRequests) {
             $loadingBoardInfo = "Fetching issues and pull requests...";
         } else {
-            $loadingBoardInfo = "Fetching issues and pull requests...";
+            $loadingBoardInfo = "Fetching issues...";
         }
 
         $issues = await getAllProjectsIssues($projects.map(({id}) => id));
