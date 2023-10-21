@@ -1,5 +1,5 @@
-import {get} from 'svelte/store';
-import {settings} from "../store.js";
+import { get } from "svelte/store";
+import { settings } from "../store.js";
 
 const GITLAB_API_URL = import.meta.env.VITE_GITLAB_API_URL;
 const GITLAB_API_TOKEN = import.meta.env.VITE_GITLAB_API_TOKEN;
