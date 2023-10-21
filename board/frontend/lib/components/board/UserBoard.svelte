@@ -1,11 +1,11 @@
 <script>
     import IssuesColumn from "./IssuesColumn.svelte";
     import IssuesRow from "./IssuesRow.svelte";
-    import {beforeUpdate, afterUpdate} from "svelte";
-    import {settings, issues, activeProjectFilter, teamprojects, displaymode, teams} from "../../store";
-    import {getLabelNameById} from "../utils/labels";
-    import {getTeamColumns} from "../utils/columns";
-    import {getMemberAvatar} from "../utils/member";
+    import { beforeUpdate, afterUpdate } from "svelte";
+    import { settings, issues, activeProjectFilter, teamprojects, displaymode, teams } from "../../store";
+    import { getLabelNameById } from "../utils/labels";
+    import { getTeamColumns } from "../utils/columns";
+    import { getMemberAvatar } from "../utils/member";
 
     export let member;
     let isOpen = false;

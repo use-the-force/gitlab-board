@@ -42,10 +42,16 @@
             <div class="float-end">
                 <div class="float-start mx-3">
                     <div class="input-group">
-                        <button class="btn btn-outline-secondary {$displaymode == "kanban" ? "active" : ""}" type="button" on:click={handleKanbanMode}>
+                        <button
+                                class="btn btn-outline-secondary {$displaymode == "kanban" ? "active" : ""}"
+                                type="button"
+                                on:click={handleKanbanMode}>
                             <span class="bi bi-kanban"></span>
                         </button>
-                        <button class="btn btn-outline-secondary {$displaymode == "list" ? "active" : ""}" type="button" on:click={handleListMode}>
+                        <button
+                                class="btn btn-outline-secondary {$displaymode == "list" ? "active" : ""}"
+                                type="button"
+                                on:click={handleListMode}>
                             <span class="bi bi-list"></span>
                         </button>
                     </div>

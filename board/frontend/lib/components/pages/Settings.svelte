@@ -6,8 +6,9 @@
     import Navbar from "../layout/Navbar.svelte";
     import Footer from "../layout/Footer.svelte";
     import {settings} from "../../store.js";
-    console.log($settings);
+
     const handleChangeSettingGeneralMergeRequests = async (e) => {
+        console.log($settings);
         $settings.general.mergeRequests = e.target.checked;
         console.log($settings);
     }
@@ -37,7 +38,10 @@
                             <p class="text-muted mb-0">Include merge requests in kanban desk.</p>
                         </div>
                         <div class="col-auto">
-                            <input type="checkbox" bind:checked={$settings.general.mergeRequests} on:change={handleChangeSettingGeneralMergeRequests}/>
+                            <input
+                                    type="checkbox"
+                                    bind:checked={$settings.general.mergeRequests}
+                                    on:change={handleChangeSettingGeneralMergeRequests}/>
                         </div>
                     </div>
                 </div>

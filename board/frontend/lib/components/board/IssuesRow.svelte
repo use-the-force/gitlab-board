@@ -63,8 +63,7 @@
                     (iss.merge_requests.length > 0 && iss.merge_requests[0].assignee && iss.merge_requests[0].assignee.id != iss.assignee.id && iss.assignee.id != member.id ? "in_review" : ""),
                 ].join(" ")}>
                     <td class="status">
-                        <select class="form-select form-select-sm"
-                                on:change={e => {handleChangeIssueStatus(e.target.value, iss)}}>
+                        <select class="form-select form-select-sm" on:change={e => {handleChangeIssueStatus(e.target.value, iss)}}>
                             {#each doGetTeamColumns() as c, ci}
                                 <optgroup label={c.name}>
                                     {#each getUniqLabelNamesByIds(c.gitlab_label_ids) as label}
@@ -112,7 +111,6 @@
         </table>
     </div>
 {/if}
-
 
 <style>
     table {

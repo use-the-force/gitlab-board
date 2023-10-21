@@ -117,26 +117,7 @@
 
 <Offcanvas isOpen={showBoardSettings} toggle={toggleBoardSettings} placement="end" scroll style="width: 50vw;">
     <Settings/>
-    <!-- {#each $statuses as status, index (status.name)}
-        <div>
-        {status.name}
-        </div>
-    {/each} -->
 </Offcanvas>
-
-<!-- <Offcanvas isOpen={columnSettingsOpen} toggle={toggleColumnSettings} placement="end" scroll style="width: 30vw;">
-  {#each $statuses as status, index (status.name)}
-    <div animate:flip
-      draggable={true}
-      on:dragstart={event => dragstart(event, index)}
-      on:drop|preventDefault={event => drop(event, index)}
-      on:dragover={() => {return false}}
-      on:dragenter={() => hovering = index}>
-      {status.name}
-    </div>
-  {/each}
-</Offcanvas> -->
-
 
 <Container fluid class="py-4 bg-white">
     <div>
