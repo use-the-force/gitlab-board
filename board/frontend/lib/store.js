@@ -3,11 +3,11 @@ import { writable, readable } from "svelte/store";
 export const loadingBoardInfo = writable("Loading...");
 export let authorized = writable(false);
 
-export const settings = writable({
-    general: {
-        mergeRequests: false
-    }
-});
+const storedSettingsMergeRequests = localStorage.getItem("settingsMergeRequests")
+export const settingsMergeRequests = writable(storedSettingsMergeRequests);
+settingsMergeRequests.subscribe(val => {
+    localStorage.setItem("settingsMergeRequests", val);
+})
 
 export const projects = writable([]);
 export const teamprojects = writable({});
@@ -31,11 +31,6 @@ export const defaultType = readable({
 
 export const setAuthorized = (value) => {
     authorized = value;
-};
-
-export const setSettingGeneralMergeRequests = (value) => {
-    console.log(settings);
-    settings.general.mergeRequests = value;
 };
 
 export const displaymode = writable("kanban");

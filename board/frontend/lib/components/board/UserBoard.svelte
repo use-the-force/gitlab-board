@@ -2,7 +2,7 @@
     import IssuesColumn from "./IssuesColumn.svelte";
     import IssuesRow from "./IssuesRow.svelte";
     import { beforeUpdate, afterUpdate } from "svelte";
-    import { settings, issues, activeProjectFilter, teamprojects, displaymode, teams } from "../../store";
+    import { settingsMergeRequests, issues, activeProjectFilter, teamprojects, displaymode, teams } from "../../store";
     import { getLabelNameById } from "../utils/labels";
     import { getTeamColumns } from "../utils/columns";
     import { getMemberAvatar } from "../utils/member";
@@ -42,7 +42,7 @@
                     return i;
                 }
 
-                if ($settings.general.mergeRequests) {
+                if ($settingsMergeRequests) {
                     // Issues by merge requests
                     if (i.merge_requests.filter(mr => member.id && mr.assignee && mr.assignee.id == member.id).length > 0 && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
                         return i;

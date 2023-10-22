@@ -5,12 +5,10 @@
     } from "sveltestrap";
     import Navbar from "../layout/Navbar.svelte";
     import Footer from "../layout/Footer.svelte";
-    import {settings} from "../../store.js";
+    import {settingsMergeRequests} from "../../store.js";
 
     const handleChangeSettingGeneralMergeRequests = async (e) => {
-        console.log($settings);
-        $settings.general.mergeRequests = e.target.checked;
-        console.log($settings);
+        $settingsMergeRequests = e.target.checked;
     }
 </script>
 
@@ -40,7 +38,7 @@
                         <div class="col-auto">
                             <input
                                     type="checkbox"
-                                    bind:checked={$settings.general.mergeRequests}
+                                    checked={$settingsMergeRequests == "true"}
                                     on:change={handleChangeSettingGeneralMergeRequests}/>
                         </div>
                     </div>
