@@ -3,6 +3,12 @@ import { writable, readable } from "svelte/store";
 export const loadingBoardInfo = writable("Loading...");
 export let authorized = writable(false);
 
+const storedSettingsMergeRequests = localStorage.getItem("settingsMergeRequests");
+export const settingsMergeRequests = writable(storedSettingsMergeRequests);
+settingsMergeRequests.subscribe(val => {
+    localStorage.setItem("settingsMergeRequests", val);
+});
+
 export const projects = writable([]);
 export const teamprojects = writable({});
 export const issues = writable([]);

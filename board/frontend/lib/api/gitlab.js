@@ -1,3 +1,6 @@
+import { get } from "svelte/store";
+import { settingsMergeRequests } from "../store.js";
+
 const GITLAB_API_URL = import.meta.env.VITE_GITLAB_API_URL;
 const GITLAB_API_TOKEN = import.meta.env.VITE_GITLAB_API_TOKEN;
 
@@ -38,6 +41,7 @@ export const getAllProjectsMembers = async (projectIds) => {
     const uniqMembers = [...new Map(members.map((i) => [i.id, i])).values()];
     const filteredMembers = uniqMembers.filter(i => i.state === "active");
     console.log(">>> filteredMembers", filteredMembers);
+
     return filteredMembers;
 };
 
@@ -76,6 +80,7 @@ export const getAllProjectsIssues = async (projectIds) => {
 };
 
 export const getProjectIssues = async (projectId) => {
+    const storeSettingsMergeRequests = get(settingsMergeRequests);
     const perPage = 100;
     const issues = [];
     let page = 1;
@@ -83,22 +88,30 @@ export const getProjectIssues = async (projectId) => {
 
     do {
         try {
-            const res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues?state=opened&per_page=${perPage}&page=${page}`,
+            const res = await fetch(
+                `${GITLAB_API_URL}/projects/${projectId}/issues?state=opened&per_page=${perPage}&page=${page}`,
                 {
                     headers: {
                         "PRIVATE-TOKEN": GITLAB_API_TOKEN
                     }
-                });
+                }
+            );
             data = await res.json();
+
             for (const i of data) {
-                const mrs = await getProjectIssueMRs(projectId, i.iid);
-                i.merge_requests = mrs;
+                i.merge_requests = [];
+
+                if (storeSettingsMergeRequests) {
+                    i.merge_requests = await getProjectIssueMergeRequests(projectId, i.iid);
+                }
             }
+
             issues.push(...data);
         } catch {
         }
         ++page;
     } while (data.length === perPage || !data);
+
     return issues;
 };
 
@@ -137,15 +150,15 @@ export const getProjectLabels = async (projectId) => {
     return labels;
 };
 
-export const getProjectIssueMRs = async (projectId, issueId) => {
+export const getProjectIssueMergeRequests = async (projectId, issueId) => {
     const res = await fetch(`${GITLAB_API_URL}/projects/${projectId}/issues/${issueId}/related_merge_requests`,
         {
             headers: {
                 "PRIVATE-TOKEN": GITLAB_API_TOKEN
             }
         });
-    const data = await res.json();
-    return data;
+
+    return await res.json();
 };
 
 export const updateIssueLabels = async (projectId, issueId, labels) => {

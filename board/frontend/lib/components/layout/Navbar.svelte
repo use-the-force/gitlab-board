@@ -24,6 +24,9 @@
                         <UserAvatar></UserAvatar>
                     </DropdownToggle>
                     <DropdownMenu end>
+                        <DropdownItem href="/settings">
+                            Settings
+                        </DropdownItem>
                         <DropdownItem divider/>
                         <DropdownItem on:click={(e) => logout()}>
                             Logout

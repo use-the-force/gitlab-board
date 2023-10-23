@@ -1,8 +1,8 @@
 <script>
     import IssuesColumn from "./IssuesColumn.svelte";
     import IssuesRow from "./IssuesRow.svelte";
-    import {beforeUpdate, afterUpdate} from "svelte";
-    import { issues, activeProjectFilter, teamprojects, displaymode, teams } from "../../store";
+    import { beforeUpdate, afterUpdate } from "svelte";
+    import { settingsMergeRequests, issues, activeProjectFilter, teamprojects, displaymode, teams } from "../../store";
     import { getLabelNameById } from "../utils/labels";
     import { getTeamColumns } from "../utils/columns";
     import { getMemberAvatar } from "../utils/member";
@@ -41,9 +41,12 @@
                 if (i.assignee && i.assignee.id == member.id && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
                     return i;
                 }
-                // Issues by merge requests
-                if (i.merge_requests.filter(mr => member.id && mr.assignee && mr.assignee.id == member.id).length > 0 && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
-                    return i;
+
+                if ($settingsMergeRequests) {
+                    // Issues by merge requests
+                    if (i.merge_requests.filter(mr => member.id && mr.assignee && mr.assignee.id == member.id).length > 0 && col.gitlab_label_ids.filter(x => i.labels.includes(getLabelNameById(x))).length > 0) {
+                        return i;
+                    }
                 }
             }
         });
@@ -119,7 +122,7 @@
         margin: 0;
     }
 
-    .assignee-wrap:hover .assignee-name{
+    .assignee-wrap:hover .assignee-name {
         text-decoration: underline;
     }
 
